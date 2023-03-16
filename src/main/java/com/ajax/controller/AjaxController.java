@@ -9,15 +9,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ajax.dto.AjaxDTO;
 import com.ajax.dto.AjaxNumberDTO;
+import com.ajax.dto.MovieDTO;
+import com.ajax.repository.MovieRepository;
+import com.ajax.service.MovieService;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class AjaxController {
+	
+	private final MovieService movieService;
+	
 	
 	//AJAX 컨트롤러
 	@GetMapping("/ex01")
@@ -145,16 +155,33 @@ public class AjaxController {
 	}
 	
 	
-	@GetMapping("/sum")
-	@ResponseBody
-	public String sum(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
+	@GetMapping("/ajax")
+	public @ResponseBody Integer ajax(Integer num1 , Integer num2) {
 		
-		int result = num1 + num2;
-		
-		return Integer.toString(result);
-		
+		return num1 + num2; 
 	}
 	
-	
+//	@PostMapping("/movie/put") // param1를 넘겨준다.
+//	  // @RequestBody : 클라이언트에서 넘긴 파라미터가 'JSON 형식이다'라고 선언시 DTO에 저장
+//	  // 리턴을 DTO 객체를 return
+//	public @ResponseBody MovieDTO ex07(@RequestBody MovieDTO movieDTO) {
+//		movieRepository.save(null)
+//	
+//	// BackEnd DB의 로직을 처리후 DB의 레코드 하나를 DTO 객체에 저장후 리턴
+//	return movieDTO;
+//	}
+	@PostMapping("/movie/put") 
+	public @ResponseBody String lab2(@RequestBody MovieDTO movieDTO) {
+		// 모델매퍼를 통해 주입완료
+		System.out.println("AjaxController ex07 요청 성공");
+		System.out.println("ajaxDTO : " + movieDTO);
+
+		//BackEnd DB의 로직을 처리후 DB의 레코드 하나를 DTO 객체에 저장후 리턴 
+
+		
+		String str = movieService.movieInsert(movieDTO); 
+		
+		return str;
+	}
 
 }

@@ -3,46 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <title>Ajax-LAB</title>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js">
+	</script>
 </head>
 <body>
 	<h1>Ajax-LAB</h1>
 	
-	<div>
-		<input type="text" id="num1" name="num1"> + <input type="text" id="num2" name="num2">
-		<button onclick="plus">=</button>
-		<span>
-		<input type="text" id="result" name="result">
-		</span>
-	</div>
+	<form name="form1" method="get" auction="#"> 
+		<input type="text" name="num1" placeholder="정수값1">  +
+		<input type="text" name="num2" placeholder="정수값2"> 
+		<p/> 
+		<input type="button" onclick="ajaxFn()" value="더하기 버튼">
+	
+		<p/> 
+		결과물 출력 : <span id="result"> </span>
+	
+	</form>
+	
 	
 </body>
 <script type="text/javascript">
-	const plus = () => {
-		var num1 = document.getElementById("num1").value;
-		var num2 = document.getElementById("num2").value;
+
+	const ajaxFn = () => {
+		//console.log("함수 호출 성공 ")
+		let form1 = document.form1; 
+		let num1 = form1.num1.value; 
+		console.log(num1); 
+		let num2 = form1.num2.value; 
+		console.log(num2);
 		
 		
-		$.ajax({
-			type:"post",
-			url:"/sum",
-			data:{"num1":num1,
-				  "num2":num2},
+		
+		$.ajax ({		// ajax 구문블락 
+			//요청 방식 : get / post
+			//요청 주소 : /ex01			<== Controller로 보내는 요청 주소 
+			type:"get",
+			url:"/ajax",
+			
+			data:{			//json 형식으로 전송 
+				"num1": num1, 
+				"num2": num2
+			},
+
+			//요청이 성공했을때 실행되는 부분 
 			success:function(res){
 				console.log("성공", res)
+				 $("#result").html( res + " <=== 결과 출력 성공");
+				
 			},
+			
+			//요청이 실패 했을때 실행되는 블락 (예외 처리 )
 			error:function(){
-				console.log("실패")
-			}
-				  
-			
-
-			
-			
+				console.log("실패 ")
+			}			
 			
 		})
 		
-		
 	}
+
 </script>
 
 </html>

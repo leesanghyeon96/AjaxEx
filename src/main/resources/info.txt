@@ -33,9 +33,31 @@ ajax 활용 (하나의 페이지 전체를 리프레시 하지 않고, 해당요
 	<span></span> 블락안에 결과값 출력
 
 =============================================
+ Spring Boot - LAB (실습) 업로드 URL 
+https://url.kr/u86s1c
+   - 프로잭프 파일 압축해서 업로드하세요.
+   - 조명_이름.zip 
+ 
+ https://image.tmdb.org/t/p/w1280/
+ 
+ 	"results": {
+		"backdrop_path": "https://image.tmdb.org/t/p/w1280/r7Dfg9aRZ78gJsmDlCirIIlNH3d.jpg",
+		"id_num": 785084,
+		"original_language": "en",
+		"original_title": "The Whale",
+		"overview": "272kg의 거구로 세상을 거부한 채 살아가는 대학 강사 찰리는 남은 시간이 얼마 없음을 느끼고 오랫동안 만나지 못한 10대 딸 엘리를 집으로 초대한다. 그리고, 매일 자신을 찾아와 에세이 한 편을 완성하면 전 재산을 주겠다고 제안한다.",
+		"poster_path": "/q0xV5Lnq30JiegbVGBOvVwrgUDT.jpg",
+		"release_date": "2023-03-01",
+		"title": "더 웨일",
+		"vote_count": 1165}
+ 
+ DB 명 : movieDB
+ Object => JSON 포멧으로 전송 ==>  movie 테이블에 값을 저장 
+ Ajax로 서버로 /movie/put 으로 요청을 보내고    
+ 	DTO ===> Entity ==> Repositoy ==> DB Table  : H2DB를 사용해서 저장 
+ 	
 
-
-
+ 	
 
 
 
